@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<!--/*/ <th:block th:include="fragments/form.html :: head">
+        </th:block> /*/-->
+</head>
+
+<body>
+	<div class="app header-success side-nav-dark">
+		<div class="layout">
+			<!-- Header START -->
+			<div class="header navbar"
+				th:replace="fragments/index.html :: header-navbar"></div>
+			<!-- Header END -->
+
+			<!-- Side Nav START -->
+			<div class="side-nav expand-lg"
+				th:replace="fragments/index.html :: side-nav('Cuti Pegawai', 'aturCutiPegawai')"></div>
+			<!-- Side Nav END -->
+
+			<!-- Page Container START -->
+			<div class="page-container">
+				<!-- Quick View START -->
+				<!-- Side Panel END -->
+
+				<!-- Content Wrapper START -->
+				<div class="main-content">
+					<div class="container-fluid">
+						<div class="page-header">
+							<h2 class="header-title">Management Cuti Pegawai</h2>
+							<div class="header-sub-title">
+								<nav class="breadcrumb breadcrumb-dash">
+									<a th:href="@{/}" class="breadcrumb-item"><i
+										class="ti-home p-r-5"></i>Home</a> <a class="breadcrumb-item"
+										th:href="@{/pegawai-cuti}">Pegawai Cuti</a> <span
+										class="breadcrumb-item active">Info</span>
+								</nav>
+							</div>
+						</div>
+
+						<div class="card">
+							<div class="card-header border bottom">
+								<h4 class="card-title">Informasi cuti pegawai
+									berdasarkan periode <b th:text="${pegawaiCuti.cuti.tahun}"></b></h4>
+							</div>
+							<div class="card-body">
+							
+                                <div class="row" style="display: none">
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label class="col-sm-4 col-form-label control-label text-dark">NIK</label>
+                                            <div class="col-sm-8">
+                                                <p class="form-control-plaintext" th:text="${pegawaiCuti.pegawai.nik}"></p>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-4 col-form-label control-label text-dark">Nama</label>
+                                            <div class="col-sm-8">
+                                                <p class="form-control-plaintext" th:text="${pegawaiCuti.pegawai.nama}"></p>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-4 col-form-label control-label text-dark">Tanggal Lahir</label>
+                                            <div class="col-sm-8">
+                                                <p class="form-control-plaintext" th:text="${#temporals.format(pegawaiCuti.pegawai.tanggalLahir, 'dd/MMMM/yyyy')}"></p>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-4 col-form-label control-label text-dark">Telepon</label>
+                                            <div class="col-sm-8">
+                                                <p class="form-control-plaintext" th:text="${pegawaiCuti.pegawai.telepon}"></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                    	<div class="form-group row">
+                                            <label class="col-sm-5 col-form-label control-label text-dark">Agama</label>
+                                            <div class="col-sm-7">
+                                                <p class="form-control-plaintext" th:text="${pegawaiCuti.pegawai.agama}"></p>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-5 col-form-label control-label text-dark">Status Perkawinan</label>
+                                            <div class="col-sm-7">
+                                                <p class="form-control-plaintext" th:text="${pegawaiCuti.pegawai.statusPerkawinan}"></p>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-5 col-form-label control-label text-dark">Kewarganegaraan</label>
+                                            <div class="col-sm-7">
+                                                <p class="form-control-plaintext" th:text="${pegawaiCuti.pegawai.kewarganegaraan}"></p>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-5 col-form-label control-label text-dark">Alamat</label>
+                                            <div class="col-sm-7">
+                                                <p class="form-control-plaintext" th:text="${pegawaiCuti.pegawai.alamat}"></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            	<br><br>
+								<h4>Data Pegawai</h4>
+								<hr />
+								<div class="row">
+									<div class="col-md-6">
+									
+										<div class="form-group row">
+											<label
+												class="col-sm-4 col-form-label control-label text-dark">Nama</label>
+											<div class="col-sm-8">
+												<p class="form-control-plaintext"
+													th:text="${pegawaiCuti.pegawai.nama}"></p>
+											</div>
+										</div>
+										
+										<div class="form-group row">
+											<label
+												class="col-sm-4 col-form-label control-label text-dark">Tanggal
+												Masuk</label>
+											<div class="col-sm-8">
+												<p class="form-control-plaintext"
+													th:text="${#temporals.format(pegawaiCuti.pegawai.tanggalMasuk, 'dd/MMMM/yyyy')}"></p>
+											</div>
+										</div>
+										<div class="form-group row">
+											<label
+												class="col-sm-4 col-form-label control-label text-dark">Jabatan</label>
+											<div class="col-sm-8">
+												<p class="form-control-plaintext"
+													th:text="${pegawaiCuti.pegawai.jabatan.nama}"></p>
+											</div>
+										</div>
+
+									</div>
+									<div class="col-md-6">
+                                        <div class="form-group row">
+											<label
+												class="col-sm-5 col-form-label control-label text-dark">NPWP</label>
+											<div class="col-sm-7">
+												<p class="form-control-plaintext"
+													th:text="${pegawaiCuti.pegawai.npwp}"></p>
+											</div>
+										</div>
+										
+										<div class="form-group row">
+											<label
+												class="col-sm-5 col-form-label control-label text-dark">Status
+												Pekerjaan</label>
+											<div class="col-sm-7">
+												<p class="form-control-plaintext"
+													th:text="${pegawaiCuti.pegawai.statusPekerjaan}"></p>
+											</div>
+										</div>
+										<div class="form-group row">
+											<label
+												class="col-sm-5 col-form-label control-label text-dark">Pendidikan
+												Terakhir</label>
+											<div class="col-sm-7">
+												<p class="form-control-plaintext"
+													th:text="${pegawaiCuti.pegawai.pendidikanTerakhir}"></p>
+											</div>
+										</div>
+									</div>
+								</div>
+								<br> <br>
+								
+								<h4>Data Cuti Pegawai</h4>
+								<hr />
+								<div class="row">
+									<div class="col-md-12">
+										<div class="form-group row">
+											<label
+												class="col-sm-4 col-form-label control-label text-dark">Type</label>
+											<div class="col-sm-8">
+												<p class="form-control-plaintext"
+													th:text="${pegawaiCuti.cuti.type}"></p>
+											</div>
+										</div>
+										<div class="form-group row">
+											<label
+												class="col-sm-4 col-form-label control-label text-dark">Jumlah Cuti Tahunan</label>
+											<div class="col-sm-8">
+												<p class="form-control-plaintext"
+													th:text="${pegawaiCuti.cuti.jumlahCutiTahunan}"></p>
+											</div>
+										</div>
+										<div class="form-group row">
+											<label
+												class="col-sm-4 col-form-label control-label text-dark">Tahun</label>
+											<div class="col-sm-8">
+												<p class="form-control-plaintext"
+													th:text="${pegawaiCuti.cuti.tahun}"></p>
+											</div>
+										</div>
+
+									</div>
+								
+								</div>
+								<br> <br>
+							</div>
+						</div>
+
+
+					</div>
+					<!-- Content Wrapper END -->
+
+					<!-- Footer START -->
+					<footer class="content-footer"
+						th:replace="fragments/index.html :: content-footer"> </footer>
+					<!-- Footer END -->
+
+				</div>
+				<!-- Page Container END -->
+
+			</div>
+		</div>
+
+		<!--/*/ <th:block th:include="fragments/form.html :: assets-js">
+        </th:block> /*/-->
+</body>
+
+</html>

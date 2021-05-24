@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<!--/*/ <th:block th:include="fragments/form.html :: head">
+        </th:block> /*/-->
+
+<style>
+table.table thead .sorted:after{
+	display: inline-block;
+	font-family: 'FontAwesome';
+	opacity: 0.8;
+	margin-left: 1em;
+}
+table.table thead .sorted.sorted-desc:after{
+	content: "\f15e";
+}
+table.table thead .sorted.sorted-asc:after{
+	content: "\f15d";
+}
+</style>
+</head>
+
+<body>
+	<div class="app header-success side-nav-dark">
+		<div class="layout">
+			<!-- Header START -->
+			<div class="header navbar"
+				th:replace="fragments/index.html :: header-navbar"></div>
+			<!-- Header END -->
+
+			<!-- Side Nav START -->
+			<div class="side-nav expand-lg"
+				th:replace="fragments/index.html :: side-nav('Master Data', 'cuti')"></div>
+			<!-- Side Nav END -->
+
+			<!-- Page Container START -->
+			<div class="page-container">
+				<!-- Quick View START -->
+				<!-- Side Panel END -->
+
+				<!-- Content Wrapper START -->
+				<div class="main-content">
+					<div class="container-fluid">
+						<div class="row">
+							<div class="col-md-12">
+								<div class="card">
+									<div class="card-header border bottom">
+										<h5 class="card-title">Kelola Cuti</h5>
+									</div>
+									<div class="card-body">
+										<a class="btn btn-icon btn-default"
+											th:href="@{/cuti/add}"><i class="fa fa-plus"
+											aria-hidden="true"></i> <span>Tambah cuti tahunan</span> </a> <br /> <br /> <br />
+										<div class="table-overflow">
+											Show <span sd:page-size-selector="javascript"></span> entries
+											<form th:action="@{/cuti}" method="get"
+												class="pull-right">
+												<div class="input-group input-group-sm"
+													style="width: 250px;">
+													<input type="text" style="height: 30px;" name="search"
+														class="form-control pull-right" placeholder="Search" th:if="${key} == null" />
+													<input type="text" style="height: 30px;" name="search"
+														class="form-control pull-right" th:if="${key} != null"
+														th:value="${key}" />
+													<div class="input-group-btn">
+														<button type="submit" style="font-size: 10px;"
+															class="btn btn-default">
+															<i class="fa fa-search"></i>
+														</button>
+													</div>
+												</div>
+											</form>
+											<table class="table table-xl border" style="margin: 10px 0">
+												<thead>
+													<tr>
+														<th><a class="sorted">#</a></th>
+														<th><a class="sorted" sd:pagination-sort="type">Type</a></th>
+														<th><a class="sorted" sd:pagination-sort="jumlahCutiTahunan">Jumlah Cuti Tahunan</a></th>
+														<th><a class="sorted" sd:pagination-sort="tahun">Tahun</a></th>
+														<th>Option</th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr th:each="row, itr : ${page}">
+														<td th:text="${itr.index + 1}"></td>
+														<td th:text="${row.type}"></td>
+														<td th:text="${row.jumlahCutiTahunan}"></td>
+														<td th:text="${row.tahun}"></td>
+														<td class="text-center font-size-18" style="width: 150px">
+															<a th:href="@{/cuti/{id}(id=${row.id})}" class="text-gray m-r-15" th:attr="table-id=${row.id}" title="Info">
+																<i class="fa fa-info" aria-hidden="true"></i>
+															</a> 
+															<a th:href="@{/cuti/{id}/edit(id=${row.id})}" class="text-gray m-r-15" th:attr="table-id=${row.id}" title="Edit">
+																<i class="ti-pencil" aria-hidden="true"></i>
+															</a> 
+															<a href="javascript:void(0);" class="text-gray swal-function" th:attr="table-id=${row.id}" title="Delete"> 
+																<i class="ti-trash" aria-hidden="true"></i>
+															</a>
+														</td>
+													</tr>
+												</tbody>
+											</table>
+
+										</div>
+
+										<div class="row">
+											<div class="col-sm-6">
+												<div sd:pagination-summary="">info</div>
+											</div>
+											<div class="col-sm-6">
+												<nav class="pull-right">
+													<ul class="pagination" sd:pagination-split="7"
+														sd:pagination="full">
+														<!-- Pagination created by SpringDataDialect, this content is just for mockup -->
+														<li class="disabled"><a href="#"
+															aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
+														<li class="active"><a href="#">1 <span
+																class="sr-only">(current)</span></a></li>
+													</ul>
+												</nav>
+											</div>
+										</div>
+
+									</div>
+								</div>
+							</div>
+						</div>
+
+					</div>
+					<!-- Content Wrapper END -->
+
+					<!-- Footer START -->
+					<footer class="content-footer"
+						th:replace="fragments/index.html :: content-footer"> </footer>
+					<!-- Footer END -->
+
+				</div>
+				<!-- Page Container END -->
+
+			</div>
+		</div>
+
+		<!--/*/ <th:block th:include="fragments/form.html :: assets-js">
+        </th:block> /*/-->
+
+		<script type="text/javascript">
+			
+			$('.swal-function')
+					.on(
+							'click',
+							function() {
+								var pkId = $(this).attr("table-id");
+								console.log("table-id" + pkId)
+								swal(
+										{
+											title : "Yakin akan di hapus?",
+											text : "Catatan: Periksa kembali data yang akan di hapus",
+											type : "warning",
+											showCancelButton : true,
+											confirmButtonColor : "#DD6B55",
+											confirmButtonText : "Yes, delete it!",
+											closeOnConfirm : false
+										},
+										function() {
+
+											$.ajax({
+												type : "GET",
+												url : "/cuti/"+pkId+"/delete",
+												success : function(result) {
+													if (result == true) {
+														swal(
+																"Deleted!",
+																"Data berhasil di hapus.",
+																"success");
+														setTimeout(()=>{
+															window.location.reload();
+														}, 2000);
+													} else {
+														swal(
+																"Deleted!",
+																"Data tidak dapat di hapus.",
+																"warning");
+													}
+												},
+												error : function(e) {
+													console.log(e);
+												}
+											});
+
+										});
+							});
+		</script>
+</body>
+
+</html>

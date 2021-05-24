@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<!--/*/ <th:block th:include="fragments/form.html :: head">
+        </th:block> /*/-->
+<link th:href="@{/style.css}" rel="stylesheet">
+</head>
+
+<body>
+	<div class="app header-success side-nav-dark">
+		<div class="layout">
+			<!-- Header START -->
+			<div class="header navbar"
+				th:replace="fragments/index.html :: header-navbar"></div>
+			<!-- Header END -->
+
+			<!-- Side Nav START -->
+			<div class="side-nav expand-lg"
+				th:replace="fragments/index.html :: side-nav('Pegawai', 'pegawai')"></div>
+			<!-- Side Nav END -->
+
+			<!-- Page Container START -->
+			<div class="page-container">
+				<!-- Quick View START -->
+				<!-- Side Panel END -->
+
+				<!-- Content Wrapper START -->
+				<div class="main-content">
+					<div class="container-fluid">
+						<div class="page-header">
+							<h2 class="header-title">Management Pegawai</h2>
+							<div class="header-sub-title">
+								<nav class="breadcrumb breadcrumb-dash">
+									<a th:href="@{/}" class="breadcrumb-item"><i
+										class="ti-home p-r-5"></i>Home</a> <a class="breadcrumb-item"
+										th:href="@{/pegawai}">Pegawai</a> <span
+										class="breadcrumb-item active">Tambah Pegawai</span>
+								</nav>
+							</div>
+						</div>
+
+						<div class="card">
+							<div class="card-header border bottom">
+								<h4 class="card-title">Tambah Pegawai Baru</h4>
+							</div>
+							<div class="card-body">
+								<div class="row">
+
+
+									<div class="col-sm-8 offset-sm-2">
+
+
+										<form role="form" id="form-validation" novalidate="novalidate"
+											th:action="@{/pegawai/add}"
+											th:object="${pegawaiRequestAddDto}" method="post">
+
+
+											<h3>Data Personal</h3>
+											<hr />
+
+											<div class="form-row">
+												<div class="form-group col-md-6">
+													<label class="control-label">Nama</label> <input
+														type="text" class="form-control"
+														th:field="*{nama}"> <label
+														id="inputRequired-error" class="error" for="inputRequired"
+														th:each="error: ${#fields.errors('nama')}"
+														th:text="${error}">Error</label>
+												</div>
+												<div class="form-group col-md-6">
+													<label class="control-label">NIK</label> <input type="text"
+														class="form-control"
+														th:field="*{nik}"> <label
+														id="inputRequired-error" class="error" for="inputRequired"
+														th:each="error: ${#fields.errors('nik')}"
+														th:text="${error}">Error</label>
+												</div>
+											</div>
+
+											<div class="form-group">
+												<label class="control-label">Tanggal Lahir</label>
+												<input type="text" class="form-control date-style"
+														th:field="*{formatTanggalLahir}">
+
+												<label id="inputRequired-error" class="error"
+													for="inputRequired"
+													th:each="error: ${#fields.errors('formatTanggalLahir')}"
+													th:text="${error}">Error</label>
+											</div>
+
+											<div class="form-group">
+												<label class="control-label">Telepon</label> <input
+													type="number" class="form-control"
+													th:field="*{telepon}"> <label
+													id="inputRequired-error" class="error" for="inputRequired"
+													th:each="error: ${#fields.errors('telepon')}"
+													th:text="${error}">Error</label>
+											</div>
+											<div class="form-row">
+												<div class="form-group col-md-4">
+													<label class="control-label">Agama</label> <select
+														class="form-control"
+														th:field="*{agama}">
+														<option value="Islam">Islam</option>
+														<option value="Kristen">Kristen</option>
+														<option value="Hindu">Hindu</option>
+														<option value="Budha">Budha</option>
+														<option value="Katolik">Katolik</option>
+														<option value="Kong Hu Cu">Kong Hu Cu</option>
+													</select> <label id="inputRequired-error" class="error"
+														for="inputRequired"
+														th:each="error: ${#fields.errors('agama')}"
+														th:text="${error}">Error</label>
+												</div>
+												<div class="form-group col-md-4">
+													<label class="control-label">Status Perkawinan</label> <select
+														class="form-control"
+														th:field="*{statusPerkawinan}">
+														<option value="Belum menikah">Belum Menikah</option>
+														<option value="Sudah menikah">Sudah Menikah</option>
+													</select> <label id="inputRequired-error" class="error"
+														for="inputRequired"
+														th:each="error: ${#fields.errors('statusPerkawinan')}"
+														th:text="${error}">Error</label>
+												</div>
+												<div class="form-group col-md-4">
+													<label class="control-label">Kewarganegaraan</label> <select
+														class="form-control"
+														th:field="*{kewarganegaraan}">
+														<option value="WNI">WNI</option>
+														<option value="WNA">WNA</option>
+													</select> <label id="inputRequired-error" class="error"
+														for="inputRequired"
+														th:each="error: ${#fields.errors('kewarganegaraan')}"
+														th:text="${error}">Error</label>
+												</div>
+											</div>
+											<div class="form-group">
+												<label class="control-label">Alamat</label>
+												<textarea class="form-control"
+													id="exampleFormControlTextarea1" rows="3"
+													th:field="*{alamat}"></textarea>
+
+												<label id="inputRequired-error" class="error"
+													for="inputRequired"
+													th:each="error: ${#fields.errors('alamat')}"
+													th:text="${error}">Error</label>
+											</div>
+											<h3>Informasi Pegawai</h3>
+											<p>Silakan isi data pegawai baru:</p>
+											<div class="form-group">
+												<label class="control-label">NPWP</label> <input type="text"
+													class="form-control"
+													th:field="*{npwp}"> <label
+													id="inputRequired-error" class="error" for="inputRequired"
+													th:each="error: ${#fields.errors('npwp')}"
+													th:text="${error}">Error</label>
+											</div>
+
+											<div class="form-group">
+												<label class="control-label">Tanggal Masuk</label>
+
+												<input type="text" class="form-control date-style"
+														th:field="*{formatTanggalMasuk}">
+
+												<label id="inputRequired-error" class="error"
+													for="inputRequired"
+													th:each="error: ${#fields.errors('formatTanggalMasuk')}"
+													th:text="${error}">Error</label>
+
+											</div>
+
+											<div class="form-row">
+												<div class="form-group col-md-6">
+													<label class="control-label">Status Pekerjaan</label> <select
+														class="form-control"
+														th:field="*{statusPekerjaan}">
+														<option value="Tetap">Tetap</option>
+														<option value="Kontrak">Kontrak</option>
+														<option value="Outsourching">Outsourching</option>
+													</select> <label id="inputRequired-error" class="error"
+														for="inputRequired"
+														th:each="error: ${#fields.errors('statusPekerjaan')}"
+														th:text="${error}">Error</label>
+												</div>
+												<div class="form-group col-md-6">
+													<label class="control-label">Pendidikan Terakhir</label> <select
+														class="form-control"
+														th:field="*{pendidikanTerakhir}">
+														<option value="SMP">SMP</option>
+														<option value="SMA">SMA</option>
+														<option value="S1">S1</option>
+														<option value="S2">S2</option>
+														<option value="S3">S3</option>
+													</select> <label id="inputRequired-error" class="error"
+														for="inputRequired"
+														th:each="error: ${#fields.errors('pendidikanTerakhir')}"
+														th:text="${error}">Error</label>
+												</div>
+											</div>
+
+											<div class="form-group">
+												<label class="control-label">Jabatan</label> <select
+													id="selectize-dropdown2"
+													th:field="*{jabatanId}">
+													<option th:each="jabatan : ${jabatans}"
+														th:value="${jabatan.id}" th:utext="${jabatan.nama}"></option>
+												</select> <label id="inputRequired-error" class="error"
+													for="inputRequired"
+													th:each="error: ${#fields.errors('jabatanId')}"
+													th:text="${error}">Error</label>
+											</div>
+
+											<br /> <br />
+											<div class="form-row">
+												<div class="col-sm-6">
+													<div class="form-group" style="display: none;">
+														<div class="checkbox">
+															<input id="formRowCheckbox1" type="checkbox"> <label
+																for="formRowCheckbox1">I agree to the <a href="">Term
+																	&amp; Conditions</a></label>
+														</div>
+													</div>
+												</div>
+												<div class="col-sm-6">
+													<div class="text-sm-right">
+														<button class="btn btn-gradient-success">Simpan</button>
+													</div>
+												</div>
+											</div>
+										</form>
+
+									</div>
+
+
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- Content Wrapper END -->
+
+					<!-- Footer START -->
+					<footer class="content-footer"
+						th:replace="fragments/index.html :: content-footer"> </footer>
+					<!-- Footer END -->
+
+				</div>
+				<!-- Page Container END -->
+
+			</div>
+		</div>
+
+		<!--/*/ <th:block th:include="fragments/form.html :: assets-js">
+        </th:block> /*/-->
+		<script type="text/javascript">
+			$('.date-style').datepicker({
+				format : 'yyyy-mm-dd'
+			});
+		</script>
+</body>
+
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<!--/*/ <th:block th:include="fragments/form.html :: head">
+        </th:block> /*/-->
+</head>
+
+<body>
+	<div class="app header-success side-nav-dark">
+		<div class="layout">
+			<!-- Header START -->
+			<div class="header navbar"
+				th:replace="fragments/index.html :: header-navbar"></div>
+			<!-- Header END -->
+
+			<!-- Side Nav START -->
+			<div class="side-nav expand-lg"
+				th:replace="fragments/index.html :: side-nav('Master Data', 'cuti')"></div>
+			<!-- Side Nav END -->
+			
+			<!-- Page Container START -->
+			<div class="page-container">
+				<!-- Quick View START -->
+				<!-- Side Panel END -->
+
+				<!-- Content Wrapper START -->
+				<div class="main-content">
+					<div class="container-fluid">
+						<div class="page-header">
+							<h2 class="header-title">Master Data</h2>
+							<div class="header-sub-title">
+								<nav class="breadcrumb breadcrumb-dash">
+									<a th:href="@{/}" class="breadcrumb-item"><i
+										class="ti-home p-r-5"></i>Home</a> <a class="breadcrumb-item"
+										th:href="@{/cuti}">Cuti</a> <span
+										class="breadcrumb-item active">Info</span>
+								</nav>
+							</div>
+						</div>
+						
+						<div class="card">
+                            <div class="card-header border bottom">
+                                <h4 class="card-title">Informasi detail cuti</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label control-label text-dark">Type</label>
+                                            <div class="col-sm-9">
+                                                <p class="form-control-plaintext" th:text="${cuti.type}"></p>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label control-label text-dark">Cuti Tahunan</label>
+                                            <div class="col-sm-9">
+                                                <p class="form-control-plaintext" th:text="${cuti.jumlahCutiTahunan} + ' Hari'"></p>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label control-label text-dark">Tahun / Periode</label>
+                                            <div class="col-sm-9">
+                                                <p class="form-control-plaintext" th:text="${cuti.tahun}"></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+						
+						
+					</div>
+					<!-- Content Wrapper END -->
+
+					<!-- Footer START -->
+					<footer class="content-footer" th:replace="fragments/index.html :: content-footer">
+					</footer>
+					<!-- Footer END -->
+
+				</div>
+				<!-- Page Container END -->
+
+			</div>
+		</div>
+
+		<!--/*/ <th:block th:include="fragments/form.html :: assets-js">
+        </th:block> /*/-->
+</body>
+
+</html>

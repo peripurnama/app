@@ -1,0 +1,16 @@
+package id.co.iteacode.repository;
+
+import java.util.Optional;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+
+import id.co.iteacode.model.Departement;
+
+public interface DepartementRepository extends JpaRepository<Departement, Long>{
+
+	Page<Departement> findByDeletedFalseAndNamaContainingOrDeskripsiContaining(String name, String deskripsi, Pageable pageable);
+
+}

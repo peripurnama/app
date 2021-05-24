@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<!--/*/ <th:block th:include="fragments/form.html :: head">
+        </th:block> /*/-->
+</head>
+
+<body>
+	<div class="app header-success side-nav-dark">
+		<div class="layout">
+			<!-- Header START -->
+			<div class="header navbar"
+				th:replace="fragments/index.html :: header-navbar"></div>
+			<!-- Header END -->
+
+			<!-- Side Nav START -->
+			<div class="side-nav expand-lg"
+				th:replace="fragments/index.html :: side-nav('Cuti Pegawai', 'daftarCutiPegawai')"></div>
+			<!-- Side Nav END -->
+
+			<!-- Page Container START -->
+			<div class="page-container">
+				<!-- Quick View START -->
+				<!-- Side Panel END -->
+
+				<!-- Content Wrapper START -->
+				<div class="main-content">
+					<div class="container-fluid">
+						<div class="page-header">
+							<h2 class="header-title">Detail Pengajuan Cuti Pegawai</h2>
+							<div class="header-sub-title">
+								<nav class="breadcrumb breadcrumb-dash">
+									<a th:href="@{/}" class="breadcrumb-item"><i
+										class="ti-home p-r-5"></i>Home</a> <a class="breadcrumb-item"
+										th:href="@{/pegawai-cuti}">Pegawai Cuti</a> <span
+										class="breadcrumb-item active">Info</span>
+								</nav>
+							</div>
+						</div>
+
+						<div class="card">
+							<div class="card-header border bottom">
+								<h4 class="card-title">Informasi cuti pegawai</b></h4>
+							</div>
+							<div class="card-body">
+							
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label class="col-sm-4 col-form-label control-label text-dark">Nama</label>
+                                            <div class="col-sm-8">
+                                                <p class="form-control-plaintext" th:text="${#strings.toUpperCase(pegawaiCutiDetail.pegawaiCuti.pegawai.nama)}"></p>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-4 col-form-label control-label text-dark">Jabatan</label>
+                                            <div class="col-sm-8">
+                                                <p class="form-control-plaintext" th:text="${#strings.toUpperCase(pegawaiCutiDetail.pegawaiCuti.pegawai.jabatan.nama)}"></p>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-4 col-form-label control-label text-dark">Izin Cuti</label>
+                                            <div class="col-sm-8">
+                                                <p class="form-control-plaintext"><span th:text="${pegawaiCutiDetail.totalCuti}"></span> Hari</p>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-4 col-form-label control-label text-dark">Tanggal</label>
+                                            <div class="col-sm-8">
+                                                <p class="form-control-plaintext"><span style="font-weight: bold;" th:text="${pegawaiCutiDetail.pengajuanCuti.startDate}"></span> Sampai <span style="font-weight: bold;" th:text="${pegawaiCutiDetail.pengajuanCuti.endDate}"></span></p>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-4 col-form-label control-label text-dark">Sisa Cuti</label>
+                                            <div class="col-sm-8">
+                                                <p class="form-control-plaintext" th:text="${pegawaiCutiDetail.sisaCutiTahunan}"></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                    	
+                                    </div>
+                                </div>
+                            	<br><br>
+							</div>
+						</div>
+
+
+					</div>
+					<!-- Content Wrapper END -->
+
+					<!-- Footer START -->
+					<footer class="content-footer"
+						th:replace="fragments/index.html :: content-footer"> </footer>
+					<!-- Footer END -->
+
+				</div>
+				<!-- Page Container END -->
+
+			</div>
+		</div>
+
+		<!--/*/ <th:block th:include="fragments/form.html :: assets-js">
+        </th:block> /*/-->
+</body>
+
+</html>

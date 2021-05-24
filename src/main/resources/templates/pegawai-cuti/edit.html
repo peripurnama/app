@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<!--/*/ <th:block th:include="fragments/form.html :: head">
+        </th:block> /*/-->
+<link th:href="@{/style.css}" rel="stylesheet">
+</head>
+
+<body>
+	<div class="app header-success side-nav-dark">
+		<div class="layout">
+			<!-- Header START -->
+			<div class="header navbar"
+				th:replace="fragments/index.html :: header-navbar"></div>
+			<!-- Header END -->
+
+			<!-- Side Nav START -->
+			<div class="side-nav expand-lg"
+				th:replace="fragments/index.html :: side-nav('Cuti Pegawai', 'aturCutiPegawai')"></div>
+			<!-- Side Nav END -->
+
+			<!-- Page Container START -->
+			<div class="page-container">
+				<!-- Quick View START -->
+				<!-- Side Panel END -->
+
+				<!-- Content Wrapper START -->
+				<div class="main-content">
+					<div class="container-fluid">
+						<div class="page-header">
+							<h2 class="header-title">Management Cuti Pegawai</h2>
+							<div class="header-sub-title">
+								<nav class="breadcrumb breadcrumb-dash">
+									<a th:href="@{/}" class="breadcrumb-item"><i
+										class="ti-home p-r-5"></i>Home</a> <a class="breadcrumb-item"
+										th:href="@{/pegawai-cuti}">Cuti Pegawai</a>
+									<span class="breadcrumb-item active">Edit Cuti Pegawai</span>
+								</nav>
+							</div>
+						</div>
+
+						<div class="card">
+							<div class="card-header border bottom">
+								<h4 class="card-title">Edit Cuti Pegawai</h4>
+							</div>
+							<div class="card-body">
+								<div class="row">
+
+
+									<div class="col-sm-8 offset-sm-2">
+
+
+										<form role="form" id="form-validation" novalidate="novalidate"
+											th:action="@{/pegawai-cuti/{id}/edit(id = ${pegawaiCutiRequestEditDto.id})}"
+											th:object="${pegawaiCutiRequestEditDto}" method="post">
+											
+											<div class="form-row">
+												<div class="form-group col-md-6">
+													<label class="control-label">Pegawai</label> 
+													<select id="selectize-dropdown" disabled="disabled" 
+													th:field="*{pegawaiId}">
+													<option th:each="pegawai : ${pegawais}"
+														th:value="${pegawai.id}" th:utext="${pegawai.nama}" th:selected="${pegawaiCutiRequestEditDto.pegawaiId == pegawai.id}"></option>
+												</select> 
+													<label id="inputRequired-error" class="error"
+														for="inputRequired"
+														th:each="error: ${#fields.errors('pegawaiId')}"
+														th:text="${error}">Error</label>
+												</div>
+												<div class="form-group col-md-6">
+													<label class="control-label">Tipe Cuti</label> 
+													
+													<select id="selectize-group" th:field="*{cutiId}">
+                                                        <optgroup th:each="cutiKey : ${cutis}" th:label="'Periode ' + ${cutiKey.key}">
+                                                            <option th:each="cuti : ${cutiKey.value}" th:value="${cuti.id}" th:utext="${cuti.type} + ' - ' + ${cuti.jumlahCutiTahunan} + ' - ' + ${cuti.tahun} "></option>
+                                                        </optgroup>
+                                                    </select>
+													
+													<label id="inputRequired-error" class="error"
+														for="inputRequired"
+														th:each="error: ${#fields.errors('pegawaiId')}"
+														th:text="${error}">Error</label>
+												</div>
+												
+											</div>
+											
+											<br /> <br />
+											<div class="form-row">
+												<div class="col-sm-6">
+													<div class="form-group" style="display: none;">
+														<div class="checkbox">
+															<input id="formRowCheckbox1" type="checkbox"> <label
+																for="formRowCheckbox1">I agree to the <a href="">Term
+																	&amp; Conditions</a></label>
+														</div>
+													</div>
+												</div>
+												<div class="col-sm-6">
+													<div class="text-sm-right">
+														<button class="btn btn-gradient-success">Simpan</button>
+													</div>
+												</div>
+											</div>
+
+										</form>
+
+									</div>
+
+
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- Content Wrapper END -->
+
+					<!-- Footer START -->
+					<footer class="content-footer"
+						th:replace="fragments/index.html :: content-footer"> </footer>
+					<!-- Footer END -->
+
+				</div>
+				<!-- Page Container END -->
+
+			</div>
+		</div>
+
+		<!--/*/ <th:block th:include="fragments/form.html :: assets-js">
+        </th:block> /*/-->
+		<script type="text/javascript">
+			$('#tanggalLahir').datepicker({
+				format: 'dd/mm/yyyy',
+			});
+			$('#tanggalMasuk').datepicker({
+				format: 'dd/mm/yyyy',
+			});
+		</script>
+</body>
+
+</html>
