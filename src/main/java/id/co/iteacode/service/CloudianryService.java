@@ -20,10 +20,10 @@ import com.cloudinary.utils.ObjectUtils;
 public class CloudianryService {
 
 	// Cloudinary cloud_name, API_Key and API_Secret
-	private static final String CLOUDINARY_CLOUD_NAME = "iteacode";
-	private static final String CLOUDINARY_API_KEY = "464946816123139";
-	private static final String CLOUDINARY_API_SECRET = "Y_MeQb1Tx2N1L5BeltWhpCEsWXs";
-	private static final String CLOUDINARY_URL = "cloudinary://464946816123139:Y_MeQb1Tx2N1L5BeltWhpCEsWXs@iteacode";
+	private static final String CLOUDINARY_CLOUD_NAME = "daie9b01j";
+	private static final String CLOUDINARY_API_KEY = "536882657771975";
+	private static final String CLOUDINARY_API_SECRET = "hrZkZ0HXkOKZyGaFvKB9VfEyF4k";
+	private static final String CLOUDINARY_URL = "CLOUDINARY_URL=cloudinary://536882657771975:hrZkZ0HXkOKZyGaFvKB9VfEyF4k@daie9b01j";
 
 	private Cloudinary cloudinary;
 
@@ -38,7 +38,7 @@ public class CloudianryService {
 		List<Transformation> eager = Arrays.asList(new Transformation().crop("fill").width(150).height(150));
 
 		Map<String, Object> cloudinaryUrl = null;
-		Map params = ObjectUtils.asMap("public_id", "djepati/" + formatImageName(sourceFile.getOriginalFilename()),
+		Map params = ObjectUtils.asMap("public_id", "appcut/" + formatImageName(sourceFile.getOriginalFilename()),
 				incoming, eager);
 
 		// Convert multipart file type image to File type because Cloudinary doesn't
